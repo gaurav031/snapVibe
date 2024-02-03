@@ -10,9 +10,14 @@ import path from 'path';
 import { fileURLToPath } from "url";
 import authRoutes from "./routes/auth.js";
 import userRoutes from "./routes/users.js";
+import postRoutes from "./routes/posts.js";
+import { createPost } from "./controllers/posts.js";
 import { register } from "./controllers.auth.js";
-
+import User from "./models/User.js";
+import post from "./models/post.js";
+import { user , posts } from "./data/index.js";
 import { verifyToken } from "./middleware/auth.js";
+import users from "./controllers/users.js";
 
 // CONFIGRATIOAN
 
@@ -48,10 +53,12 @@ const upload = multer({ storage}); //this help us to save
 
 //ROUTES WITH FILES
 app.post("/auth/register",upload.single("picture"), register);
+app.post("/posts", verifyToken,upload.single("picture"), createPost )//this is for save the post when post is uploaded
 
 //ROUTES
 app.use("/auth", authRoutes);
 app.use("/users", userRoutes);
+app.use("/posts", postRoutes);// for the all the post
 
 //MONGOOSE SETUP
 const PORT = process.env.PORT || 6001;
@@ -62,5 +69,9 @@ mongoose
  })
  .then(() =>{
     app.listen(PORT,()=> console.log('server Port: ${PORT}'));
+
+    //ADD DATA ONE TIME
+    // User.insertMany(users);
+    // post.insertMany(posts);
  })
  .catch((error) => console.log('${error} did not connect'));
