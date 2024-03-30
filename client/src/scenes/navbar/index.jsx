@@ -24,6 +24,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { setMode, setLogout } from "state";
 import { useNavigate } from "react-router-dom";
 import FlexBetween from "components/FlexBetween";
+import logo from "../../Image/snapvibe.png"  
 
 const Navbar = () => {
   const [isMobileMenuToggled, setIsMobileMenuToggled] = useState(false);
@@ -44,26 +45,21 @@ const Navbar = () => {
   return (
     <FlexBetween padding="1rem 6%" backgroundColor={alt}>
       <FlexBetween gap="1.75rem">
-        <Typography
-          fontWeight="bold"
-          fontSize="clamp(1rem, 2rem, 2.25rem)"
-          color="primary"
-          onClick={() => navigate("/home")}
-          sx={{
-            "&:hover": {
-              color: primaryLight,
-              cursor: "pointer",
-            },
-          }}
-        >
-          SnapVibe
-        </Typography>
+      <Box
+        width="1x"
+        backgroundColor={theme.palette.background.alt}
+        p="1rem 27%"
+        textAlign="center"
+      >
+        {/* Display the logo image */}
+        <img src={logo} alt="SnapVibe Logo" style={{ width: "50%", marginLeft:"-200px" }}/>
+      </Box>
         {isNonMobileScreens && (
           <FlexBetween
             backgroundColor={neutralLight}
             borderRadius="9px"
             gap="3rem"
-            padding="0.1rem 1.5rem"
+            padding="0.1rem 2.5rem"
           >
             <InputBase placeholder="Search..." />
             <IconButton>
