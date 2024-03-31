@@ -1,3 +1,5 @@
+import { useState } from "react";
+import { useDispatch, useSelector } from "react-redux";
 import {
   ChatBubbleOutlineOutlined,
   FavoriteBorderOutlined,
@@ -8,8 +10,6 @@ import { Box, Divider, IconButton, Typography, useTheme } from "@mui/material";
 import FlexBetween from "components/FlexBetween";
 import Friend from "components/Friend";
 import WidgetWrapper from "components/WidgetWrapper";
-import { useState } from "react";
-import { useDispatch, useSelector } from "react-redux";
 import { setPost } from "state";
 
 const PostWidget = ({
@@ -27,24 +27,28 @@ const PostWidget = ({
   const dispatch = useDispatch();
   const token = useSelector((state) => state.token);
   const loggedInUserId = useSelector((state) => state.user?._id); // Safely access user._id
-  const isLiked = Boolean(likes?.[loggedInUserId]); // Safely access likes
-  const likeCount = likes ? Object.keys(likes).length : 0; // Initialize likeCount safely
+  const isLiked = likes && loggedInUserId in likes; // Check if loggedInUserId exists in likes
+  const likeCount = Object.keys(likes || {}).length; // Initialize likeCount safely
 
   const { palette } = useTheme();
   const main = palette.neutral.main;
   const primary = palette.primary.main;
 
   const patchLike = async () => {
-    const response = await fetch(`http://localhost:3001/posts/${postId}/like`, {
-      method: "PATCH",
-      headers: {
-        Authorization: `Bearer ${token}`,
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify({ userId: loggedInUserId }),
-    });
-    const updatedPost = await response.json();
-    dispatch(setPost({ post: updatedPost }));
+    try {
+      const response = await fetch(`http://localhost:3001/posts/${postId}/like`, {
+        method: "PATCH",
+        headers: {
+          Authorization: `Bearer ${token}`,
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({ userId: loggedInUserId }),
+      });
+      const updatedPost = await response.json();
+      dispatch(setPost({ post: updatedPost }));
+    } catch (error) {
+      console.error("Error while patching like:", error);
+    }
   };
 
   return (
@@ -94,7 +98,7 @@ const PostWidget = ({
       </FlexBetween>
       {isComments && (
         <Box mt="0.5rem">
-          {comments?.map((comment, i) => ( // Safely map comments
+          {comments?.map((comment, i) => (
             <Box key={`${name}-${i}`}>
               <Divider />
               <Typography sx={{ color: main, m: "0.5rem 0", pl: "1rem" }}>
