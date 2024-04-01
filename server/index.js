@@ -15,7 +15,7 @@ import { register } from "./controllers/auth.js";
 import { createPost } from "./controllers/posts.js";
 import { verifyToken } from "./middleware/auth.js";
 import User from "./models/User.js";
-import Post from "./models/Post.js";
+import PostModel from "./models/Post.js"; // Corrected import
 
 /* CONFIGURATIONS */
 const __filename = fileURLToPath(import.meta.url);
@@ -63,15 +63,15 @@ mongoose
 
     /* ADD DATA ONE TIME */
     // User.insertMany(users);
-    // Post.insertMany(posts);
+    // PostModel.insertMany(posts);
   })
   .catch((error) => console.log(`${error} did not connect`));
 
 // Mongoose schema and model
 const { Schema } = mongoose; // Destructure Schema from mongoose
-const PostSchema = new Schema({ // Use Schema directly without mongoose
-    // Define your schema fields here
+const PostSchema = new Schema({
+  // Define your schema fields here
 });
 
-const PostModel = mongoose.model("Post", PostSchema); // Create model from schema
-export default PostModel; // Export the model
+const Post = mongoose.model("Post", PostSchema); // Create model from schema
+export default Post; // Export the model
