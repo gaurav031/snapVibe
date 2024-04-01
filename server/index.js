@@ -1,3 +1,4 @@
+
 import express from "express";
 import bodyParser from "body-parser";
 import mongoose from "mongoose";
@@ -16,7 +17,6 @@ import { createPost } from "./controllers/posts.js";
 import { verifyToken } from "./middleware/auth.js";
 import User from "./models/User.js";
 import Post from "./models/Post.js";
-import { users, posts } from "./data/index.js";
 
 /* CONFIGURATIONS */
 const __filename = fileURLToPath(import.meta.url);
@@ -67,3 +67,12 @@ mongoose
     // Post.insertMany(posts);
   })
   .catch((error) => console.log(`${error} did not connect`));
+
+// Mongoose schema and model
+const { Schema } = mongoose; // Destructure Schema from mongoose
+const PostSchema = new Schema({ // Use Schema directly without mongoose
+    // Define your schema fields here
+});
+
+const Post = mongoose.model("Post", PostSchema); // Create model from schema
+export default Post; // Export the model
