@@ -1,4 +1,3 @@
-
 import express from "express";
 import bodyParser from "body-parser";
 import mongoose from "mongoose";
@@ -74,5 +73,5 @@ const PostSchema = new Schema({ // Use Schema directly without mongoose
     // Define your schema fields here
 });
 
-const Post = mongoose.model("Post", PostSchema); // Create model from schema
-export default Post; // Export the model
+const PostModel = mongoose.model("Post", PostSchema); // Create model from schema
+export default PostModel; // Export the model
