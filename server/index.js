@@ -63,7 +63,20 @@ mongoose
     app.listen(PORT, () => console.log(`Server Port: ${PORT}`));
 
     /* ADD DATA ONE TIME */
-     User.insertMany(users);
-    Post.insertMany(posts);
+    User.insertMany(users)
+      .then(() => {
+        console.log('Users added successfully');
+      })
+      .catch((error) => {
+        console.error('Error adding users:', error);
+      });
+
+    Post.insertMany(posts)
+      .then(() => {
+        console.log('Posts added successfully');
+      })
+      .catch((error) => {
+        console.error('Error adding posts:', error);
+      });
   })
   .catch((error) => console.log(`${error} did not connect`));
