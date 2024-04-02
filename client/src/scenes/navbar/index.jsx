@@ -52,14 +52,16 @@ const Navbar = () => {
         textAlign="center"
       >
         {/* Display the logo image */}
-        <img src={logo} alt="SnapVibe Logo" style={{ width: "50%", marginLeft:"-200px" }}/>
+        <img src={logo} alt="SnapVibe Logo" style={{ width: "50%", marginLeft:"-300px" }}/>
       </Box>
         {isNonMobileScreens && (
           <FlexBetween
             backgroundColor={neutralLight}
             borderRadius="9px"
             gap="3rem"
-            padding="0.1rem 2.5rem"
+            // padding="0.1rem 2.5rem"
+            paddingLeft="4rem"
+            marginRight="2rem"
           >
             <InputBase placeholder="Search..." />
             <IconButton>
