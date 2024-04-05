@@ -53,7 +53,7 @@ app.use("/users", userRoutes);
 app.use("/posts", postRoutes);
 
 /* MONGOOSE SETUP */
-const PORT = process.env.PORT || 6001;
+const PORT = process.env.PORT || 3001;
 const MONGO_URL = process.env.MONGO_URL || 'mongodb://localhost:27017/snapvibe';
 mongoose
   .connect(MONGO_URL, {
