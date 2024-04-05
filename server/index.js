@@ -54,11 +54,11 @@ app.use("/posts", postRoutes);
 
 /* MONGOOSE SETUP */
 const PORT = process.env.PORT || 6001;
+const MONGO_URL = process.env.MONGO_URL || 'mongodb://localhost:27017/snapvibe';
 mongoose
-  .connect(process.env.MONGO_URL, {
+  .connect(MONGO_URL, {
     useNewUrlParser: true,
     useUnifiedTopology: true,
-    debug: true, // Enable debug logging
   })
   .then(() => {
     app.listen(PORT, () => console.log(`Server Port: ${PORT}`));
