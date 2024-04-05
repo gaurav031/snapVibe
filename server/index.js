@@ -58,6 +58,7 @@ mongoose
   .connect(process.env.MONGO_URL, {
     useNewUrlParser: true,
     useUnifiedTopology: true,
+    debug: true, // Enable debug logging
   })
   .then(() => {
     app.listen(PORT, () => console.log(`Server Port: ${PORT}`));
