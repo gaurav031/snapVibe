@@ -23,6 +23,7 @@
     "multer-gridfs-storage": "^5.0.2"
   },
   "scripts": {
+    "preinstall": "npm rebuild bcrypt --build-from-source --module-path=node_modules/bcrypt/lib/binding",
     "test": "echo \"Error: no test specified\" && exit 1",
     "start": "node index.js"
   },
