@@ -28,5 +28,8 @@
   },
   "keywords": [],
   "author": "",
-  "license": "ISC"
+  "license": "ISC",
+  "devDependencies": {
+    "nyc": "^14.0.0"
+  }
 }
